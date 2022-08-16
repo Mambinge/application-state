@@ -5,6 +5,7 @@ import CreateUser from '@/components/CreateUser.vue'
 import Login from '@/components/auth/Login.vue'
 import Register from '@/components/auth/Register.vue'
 import Dashboard from '@/components/shared/Dashboard.vue'
+import firebase from '@/firebase'
 
 const routes = [
   {
@@ -13,7 +14,7 @@ const routes = [
     component: Login
   },
   {
-    path: '/',
+    path: '/register',
     name: 'Register',
     component: Register
   },
@@ -35,13 +36,25 @@ const routes = [
   {
     path: '/create',
     name: 'Create',
-    component: CreateUser
+    component: CreateUser,
+    meta: {
+      requiresAuth: true
+    }
   }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach(async (to, from, next) => {
+  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+  if (requiresAuth && !await firebase.getCurrentUser()) {
+    next('Login');
+  } else {
+    next();
+  }
 })
 
 export default router

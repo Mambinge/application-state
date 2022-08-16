@@ -5,7 +5,7 @@
     </div> -->
 
     <div>
-      <navbar></navbar>
+      <SideBar/>
       <main class="py-4">
       <router-view/>
       </main>
@@ -15,25 +15,11 @@
 <script>
 
 import SideBar from "./components/shared/SideBar.vue";
-import firebase from "firebase";
 
 export default {
   components: {
     // eslint-disable-next-line vue/no-unused-components
-    SideBar
-  },
-  methods: {
-    signOut() {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          this.$router.replace({
-            name: "home"
-          });
-        });
-    }
-  }
-}
+    SideBar,
+}}
 
 </script>

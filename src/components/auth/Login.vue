@@ -59,7 +59,7 @@ export default {
             firebase.auth().signInWithEmailAndPassword(this.form.email, this.form.password)
                     // eslint-disable-next-line no-unused-vars
                     .then(data => {
-                        this.$router.replace({ name: "Dashboard" });
+                        this.$router.replace({ name: "Home" });
                         })
                     .catch(err => {
                         this.error = err.message;

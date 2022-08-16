@@ -11,7 +11,7 @@
                     <ul class="navbar-nav mr-auto"></ul>
                     <ul class="navbar-nav ml-auto">
                         <template v-if="user.loggedIn">
-                            <div class="nav-item">{{user.data.displayName}}</div>
+                            <li class="nav-item">{{user.data.displayName}}</li>
                             <li class="nav-item">
                                 <a class="nav-link" @click.prevent="signOut">Sign Out</a>
                             </li>
@@ -50,7 +50,7 @@ export default {
             .signOut()
             .then(() => {
                 this.$router.replace({
-                    name: "home"
+                    name: "Login"
                 })
             })
         }
